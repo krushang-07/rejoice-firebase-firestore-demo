@@ -23,7 +23,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import { useEffect } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
-import AdComponent from "../components/AdComponent.tsx"; // Import the Ad Component
+// import AdComponent from "../components/AdComponent.tsx"; // Import the Ad Component
 
 const EmployeeDetails: React.FC<EmployeeDetailsProps> = ({
   employees,
@@ -142,69 +142,70 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = ({
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 3 }}>
-      <Container
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "auto",
-        }}
-      >
-        <Container sx={{ padding: 5 }}>
-          <SearchIcon sx={{ padding: 2 }} />
-          <TextField
-            label="Search by Name"
-            variant="outlined"
-            value={filters.searchName}
-            onChange={handleSearch}
-            sx={{ mr: 2 }}
-          />
-        </Container>
-
-        <Button
-          style={{ borderRadius: "80px" }}
-          variant="contained"
-          color="primary"
-          onClick={handleOpen}
-        >
-          <FilterListIcon sx={{ color: "white" }} />
-        </Button>
-      </Container>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={modalStyle}>
-          <Filter
-            filters={filters}
-            setFilters={(newFilters) =>
-              setFilters((prev) => ({ ...prev, ...newFilters }))
-            }
-          />
-        </Box>
-      </Modal>
-
-      <Box sx={{ margin: 2, height: "auto" }}>
-        <Typography
-          variant="h5"
+    <>
+      <Container maxWidth="lg" sx={{ mt: 3 }}>
+        <Container
           sx={{
-            mb: 3,
-            fontWeight: "bold",
-            textAlign: "center",
-            color: "primary.main",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "auto",
           }}
         >
-          Employee List
-        </Typography>
+          <Container sx={{ padding: 5 }}>
+            <SearchIcon sx={{ padding: 2 }} />
+            <TextField
+              label="Search by Name"
+              variant="outlined"
+              value={filters.searchName}
+              onChange={handleSearch}
+              sx={{ mr: 2 }}
+            />
+          </Container>
 
-        <Box sx={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={filteredEmployees}
-            columns={columns}
-            pageSizeOptions={[]}
-          />
+          <Button
+            style={{ borderRadius: "80px" }}
+            variant="contained"
+            color="primary"
+            onClick={handleOpen}
+          >
+            <FilterListIcon sx={{ color: "white" }} />
+          </Button>
+        </Container>
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={modalStyle}>
+            <Filter
+              filters={filters}
+              setFilters={(newFilters) =>
+                setFilters((prev) => ({ ...prev, ...newFilters }))
+              }
+            />
+          </Box>
+        </Modal>
+
+        <Box sx={{ margin: 2, height: "auto" }}>
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 3,
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "primary.main",
+            }}
+          >
+            Employee List
+          </Typography>
+
+          <Box sx={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={filteredEmployees}
+              columns={columns}
+              pageSizeOptions={[]}
+            />
+          </Box>
         </Box>
-      </Box>
-      <AdComponent />
-    </Container>
+      </Container>
+    </>
   );
 };
 
